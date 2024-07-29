@@ -1,27 +1,6 @@
 version: "3"
 
 services:
-  beatmods-dev:
-    build:
-      context: .
-      dockerfile: ./dev.Dockerfile
-    image: "beatmods-dev:latest"
-    container_name: beatmods-dev
-    hostname: beatmods.dev
-    ports: ["8080:8080"]
-    develop:
-      watch:
-        - action: sync
-          path: .
-          target: /app/beatmods
-          ignore:
-            - node_modules/
-            - .postgres_data/
-            - .next/
-            - .git/
-        - action: rebuild
-          path: ./package.json
-    profiles: [dev]
   database-dev:
     image: postgres:alpine
     container_name: postgres-dev
