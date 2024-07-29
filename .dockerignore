@@ -1,0 +1,7 @@
+# node
+node_modules
+.next
+
+# project
+.postgres_data
+.idea

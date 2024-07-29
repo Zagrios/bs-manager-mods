@@ -4,12 +4,25 @@ services:
   beatmods-dev:
     # Note : to run npm commands simply use:
     # docker run --rm -it -v '.:/root/app' node:lts-alpine sh -c "cd /root/app && sh"
-    image: "node:lts-alpine"
+    build:
+      context: .
+      dockerfile: ./dev.Dockerfile
+    image: "beatmods-dev:latest"
     container_name: beatmods-dev
     hostname: beatmods.dev
     ports: ["8080:8080"]
-    volumes: [".:/root/app"]
-    command: "sh -c 'cd /root/app && npm i && npm run dev'"
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /app/beatmods
+          ignore:
+            - node_modules/
+            - .postgres_data/
+            - .next/
+            - .git/
+        - action: rebuild
+          path: ./package.json
     profiles: [dev]
   database-dev:
     image: postgres:alpine
