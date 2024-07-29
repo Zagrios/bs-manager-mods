@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  beatmods-dev:
+    # Note : to run npm commands simply use:
+    # docker run --rm -it -v '.:/root/app' node:lts-alpine sh -c "cd /root/app && sh"
+    image: "node:lts-alpine"
+    container_name: beatmods-dev
+    hostname: beatmods.dev
+    ports: ["8080:8080"]
+    volumes: [".:/root/app"]
+    command: "sh -c 'cd /root/app && npm i && npm run dev'"
+    profiles: [dev]
+  database-dev:
+    image: postgres:alpine
+    container_name: postgres-dev
+    hostname: postgres.dev
+    volumes: ["./.postgres_data:/var/lib/postgresql/data"]
+    environment:
+      POSTGRES_USER: beatmods
+      POSTGRES_PASSWORD: beatmods
+      POSTGRES_DB: beatmods
+    ports: ["127.0.0.1:5432:5432"]
+    profiles: [dev]
+  pgadmin-dev:
+    image: "elestio/pgadmin:latest"
+    container_name: pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@pgadmin.dev
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_LISTEN_PORT: 9000
+    ports: ["127.0.0.1:9000:9000"]
+    profiles: [pgadmin]
