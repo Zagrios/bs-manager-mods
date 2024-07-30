@@ -7,7 +7,7 @@ export async function NavBar() {
     return (
         <div className="navbar bg-base-100">
             <div className="navbar-start">
-            <button className="btn btn-ghost text-xl">BeatModsV2</button>
+                <button className="btn btn-ghost text-xl">BeatModsV2</button>
             </div>
             <div className="navbar-end">
                 {session ? (
