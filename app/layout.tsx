@@ -10,10 +10,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
         <html lang="en">
-            <body>
-                <header className="w-full">
-                    <NavBar />
-                </header>
+            <body className="min-h-screen flex flex-col ">
+                <NavBar/>
                 {children}
             </body>
         </html>
