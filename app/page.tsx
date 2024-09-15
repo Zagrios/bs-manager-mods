@@ -9,6 +9,7 @@ export default function Home() {
                 loop
                 muted
                 preload='auto'
+                disablePictureInPicture={true}
             >
                 <source src="http://localhost:8080/videos/beat-saber-background.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
